@@ -1,0 +1,43 @@
+﻿@model MarkMachine.Data.Market
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Market</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Symbol)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Symbol)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CategoryId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryId)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExchangeId)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExchangeId)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.MarketId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
