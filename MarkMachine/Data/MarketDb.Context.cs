@@ -26,5 +26,6 @@ namespace MarkMachine.Data
         }
     
         public DbSet<Market> Markets { get; set; }
+        public DbSet<DailyCandle> DailyCandles { get; set; }
     }
 }

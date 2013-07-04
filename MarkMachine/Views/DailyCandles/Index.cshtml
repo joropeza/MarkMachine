@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MarkMachine.Data.DailyCandle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Market.Symbol)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.High)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Low)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Open)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Close)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Volume)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Market.Symbol)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.High)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Low)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Open)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Close)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volume)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DailyCandleId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DailyCandleId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DailyCandleId })
+        </td>
+    </tr>
+}
+
+</table>

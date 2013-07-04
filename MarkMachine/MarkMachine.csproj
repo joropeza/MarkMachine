@@ -128,7 +128,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DailyCandlesController.cs" />
     <Compile Include="Controllers\MarketsController.cs" />
+    <Compile Include="Controllers\TestsController.cs" />
+    <Compile Include="Data\DailyCandle.cs">
+      <DependentUpon>MarketDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Market.cs">
       <DependentUpon>MarketDb.tt</DependentUpon>
     </Compile>
@@ -150,6 +155,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Processes\MarketUpdates.cs" />
+    <Compile Include="Processes\YahooFinance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -258,10 +265,16 @@
     <Content Include="Views\Markets\Create.cshtml" />
     <Content Include="Views\Markets\Edit.cshtml" />
     <Content Include="Views\Markets\Delete.cshtml" />
+    <Content Include="Views\DailyCandles\Index.cshtml" />
+    <Content Include="Views\DailyCandles\Details.cshtml" />
+    <Content Include="Views\DailyCandles\Create.cshtml" />
+    <Content Include="Views\DailyCandles\Edit.cshtml" />
+    <Content Include="Views\DailyCandles\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Tests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

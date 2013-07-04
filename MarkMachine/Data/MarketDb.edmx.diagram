@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="07155b072f1e431186c2b905e66215d5" Name="Diagram1">
         <EntityTypeShape EntityType="marketdbModel.Market" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="marketdbModel.DailyCandle" Width="1.5" PointX="2.20638975790068" PointY="16.785932548710115" />
+        <AssociationConnector Association="marketdbModel.FK_DailyCandles_Markets" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

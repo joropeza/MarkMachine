@@ -4,10 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="marketdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="marketdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="marketdbModelStoreContainer">
+          <EntitySet Name="DailyCandles" EntityType="marketdbModel.Store.DailyCandles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Markets" EntityType="marketdbModel.Store.Markets" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_DailyCandles_Markets" Association="marketdbModel.Store.FK_DailyCandles_Markets">
+            <End Role="Markets" EntitySet="Markets" />
+            <End Role="DailyCandles" EntitySet="DailyCandles" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="DailyCandles">
+          <Key>
+            <PropertyRef Name="DailyCandleId" />
+          </Key>
+          <Property Name="DailyCandleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="MarketId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="High" Type="smallmoney" Nullable="false" />
+          <Property Name="Low" Type="smallmoney" Nullable="false" />
+          <Property Name="Open" Type="smallmoney" Nullable="false" />
+          <Property Name="Close" Type="smallmoney" Nullable="false" />
+          <Property Name="Volume" Type="int" />
+        </EntityType>
         <EntityType Name="Markets">
           <Key>
             <PropertyRef Name="MarketId" />
@@ -18,13 +36,29 @@
           <Property Name="CategoryId" Type="int" Nullable="false" />
           <Property Name="ExchangeId" Type="int" Nullable="false" />
         </EntityType>
-      </Schema>
-    </edmx:StorageModels>
+        <Association Name="FK_DailyCandles_Markets">
+          <End Role="Markets" Type="marketdbModel.Store.Markets" Multiplicity="1" />
+          <End Role="DailyCandles" Type="marketdbModel.Store.DailyCandles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Markets">
+              <PropertyRef Name="MarketId" />
+            </Principal>
+            <Dependent Role="DailyCandles">
+              <PropertyRef Name="MarketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="marketdbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="marketdbEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Markets" EntityType="marketdbModel.Market" />
+          <EntitySet Name="DailyCandles" EntityType="marketdbModel.DailyCandle" />
+          <AssociationSet Name="FK_DailyCandles_Markets" Association="marketdbModel.FK_DailyCandles_Markets">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="DailyCandle" EntitySet="DailyCandles" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Market">
           <Key>
@@ -35,7 +69,34 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="CategoryId" Type="Int32" Nullable="false" />
           <Property Name="ExchangeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DailyCandles" Relationship="marketdbModel.FK_DailyCandles_Markets" FromRole="Market" ToRole="DailyCandle" />
         </EntityType>
+        <EntityType Name="DailyCandle">
+          <Key>
+            <PropertyRef Name="DailyCandleId" />
+          </Key>
+          <Property Type="Int32" Name="DailyCandleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="MarketId" Nullable="false" />
+          <Property Type="DateTime" Name="Date" Nullable="false" Precision="0" />
+          <Property Type="Decimal" Name="High" Nullable="false" Precision="10" Scale="4" />
+          <Property Type="Decimal" Name="Low" Nullable="false" Precision="10" Scale="4" />
+          <Property Type="Decimal" Name="Open" Nullable="false" Precision="10" Scale="4" />
+          <Property Type="Decimal" Name="Close" Nullable="false" Precision="10" Scale="4" />
+          <Property Type="Int32" Name="Volume" />
+          <NavigationProperty Name="Market" Relationship="marketdbModel.FK_DailyCandles_Markets" FromRole="DailyCandle" ToRole="Market" />
+        </EntityType>
+        <Association Name="FK_DailyCandles_Markets">
+          <End Type="marketdbModel.Market" Role="Market" Multiplicity="1" />
+          <End Type="marketdbModel.DailyCandle" Role="DailyCandle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Market">
+              <PropertyRef Name="MarketId" />
+            </Principal>
+            <Dependent Role="DailyCandle">
+              <PropertyRef Name="MarketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +111,20 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="ExchangeId" ColumnName="ExchangeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyCandles">
+            <EntityTypeMapping TypeName="marketdbModel.DailyCandle">
+              <MappingFragment StoreEntitySet="DailyCandles">
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="Close" ColumnName="Close" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="Low" ColumnName="Low" />
+                <ScalarProperty Name="High" ColumnName="High" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="MarketId" ColumnName="MarketId" />
+                <ScalarProperty Name="DailyCandleId" ColumnName="DailyCandleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

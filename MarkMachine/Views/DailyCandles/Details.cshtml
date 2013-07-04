@@ -1,0 +1,64 @@
+﻿@model MarkMachine.Data.DailyCandle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DailyCandle</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Market.Symbol)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Market.Symbol)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Date)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Date)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.High)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.High)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Low)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Low)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Open)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Open)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Close)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Close)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Volume)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Volume)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DailyCandleId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

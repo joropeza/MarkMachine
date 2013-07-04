@@ -12,19 +12,17 @@ namespace MarkMachine.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Market
+    public partial class DailyCandle
     {
-        public Market()
-        {
-            this.DailyCandles = new HashSet<DailyCandle>();
-        }
-    
+        public int DailyCandleId { get; set; }
         public int MarketId { get; set; }
-        public string Symbol { get; set; }
-        public string Name { get; set; }
-        public int CategoryId { get; set; }
-        public int ExchangeId { get; set; }
+        public System.DateTime Date { get; set; }
+        public decimal High { get; set; }
+        public decimal Low { get; set; }
+        public decimal Open { get; set; }
+        public decimal Close { get; set; }
+        public Nullable<int> Volume { get; set; }
     
-        public virtual ICollection<DailyCandle> DailyCandles { get; set; }
+        public virtual Market Market { get; set; }
     }
 }
