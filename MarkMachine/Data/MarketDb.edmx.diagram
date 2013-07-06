@@ -8,6 +8,8 @@
         <EntityTypeShape EntityType="marketdbModel.Market" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="marketdbModel.DailyCandle" Width="1.5" PointX="2.20638975790068" PointY="16.785932548710115" />
         <AssociationConnector Association="marketdbModel.FK_DailyCandles_Markets" />
+        <EntityTypeShape EntityType="marketdbModel.Gap" Width="1.5" PointX="10.652864829941123" PointY="23.386827405256604" />
+        <AssociationConnector Association="marketdbModel.FK_Gaps_Markets" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

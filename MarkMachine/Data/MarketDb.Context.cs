@@ -27,5 +27,6 @@ namespace MarkMachine.Data
     
         public DbSet<Market> Markets { get; set; }
         public DbSet<DailyCandle> DailyCandles { get; set; }
+        public DbSet<Gap> Gaps { get; set; }
     }
 }
