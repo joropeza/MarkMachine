@@ -72,8 +72,14 @@ namespace MarketMachineClassLibrary
                 td.High = decimal.Parse(contents[2]);
                 td.Low = decimal.Parse(contents[3]);
                 td.Close = decimal.Parse(contents[4]);
-                td.Volume = int.Parse(contents[5]);
-
+                try
+                {
+                    td.Volume = int.Parse(contents[5]);
+                }
+                catch
+                {
+                    td.Volume = 0;
+                }
                 qt.Add(td);
 
             }

@@ -15,7 +15,7 @@ namespace MarkMachine.Controllers
         {
             MarketMachineClassLibrary.MarketUpdates mu = new MarketMachineClassLibrary.MarketUpdates();
 
-            mu.UpdateMarketHistorical(DateTime.Now.AddDays(-90), DateTime.Now, 3);
+            mu.UpdateMarketHistorical(DateTime.Now.AddDays(-90), DateTime.Now, 4);
 
             return View();
         }

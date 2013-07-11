@@ -14,18 +14,19 @@ namespace MarkMachine.Controllers
         private marketdbEntities db = new marketdbEntities();
 
         //
-        // GET: /DailyCandles/
+        // GET: /DailyCandles/Index/1
 
-        public ActionResult Index()
+        public ActionResult Index(int id = 1)
         {
-            var dailycandles = db.DailyCandles.Include(d => d.Market);
+            var dailycandles = db.DailyCandles.Include(d => d.Market).Where(x => x.Market.MarketId == id);
+            ViewBag.MarketName = dailycandles.First().Market.Name;
             return View(dailycandles.ToList());
         }
 
         //
         // GET: /DailyCandles/Details/5
 
-        public ActionResult Details(int id = 0)
+        public ActionResult Details(int id = 1)
         {
             DailyCandle dailycandle = db.DailyCandles.Find(id);
             if (dailycandle == null)

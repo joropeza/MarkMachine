@@ -43,7 +43,7 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MarketId }) |
             @Html.ActionLink("Details", "Details", new { id=item.MarketId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MarketId })
+            @Html.ActionLink("Candles","Index", new { controller="DailyCandles", id=item.MarketId })
         </td>
     </tr>
 }

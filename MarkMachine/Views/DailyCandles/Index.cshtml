@@ -4,16 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.MarketName</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table>
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Market.Symbol)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
@@ -37,11 +35,9 @@
 
 @foreach (var item in Model) {
     <tr>
+       
         <td>
-            @Html.DisplayFor(modelItem => item.Market.Symbol)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Date)
+            @item.Date.ToShortDateString()
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.High)
