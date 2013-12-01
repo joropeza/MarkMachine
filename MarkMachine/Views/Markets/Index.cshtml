@@ -18,7 +18,7 @@
 @foreach (var item in Model) {
     
 <div class="row">
-    <div class="col-md-3">@Html.ActionLink(item.Symbol, "Index", new { controller = "DailyCandles", id = item.MarketId })</div>
+    <div class="col-md-3">@Html.ActionLink(item.Symbol, "Details", new { controller = "Markets", id = item.MarketId })</div>
     <div class="col-md-6">@Html.DisplayFor(modelItem => item.Name)</div>
     <div class="col-md-3">@Html.DisplayFor(modelItem => item.CategoryId)</div>
 </div>

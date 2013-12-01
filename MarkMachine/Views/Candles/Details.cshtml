@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MarkMachine.Models.Candle>
+
+@{
+    Layout = Request.IsAjaxRequest() ? null : "~/Views/Shared/_Layout.cshtml";
+}
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CandleStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CandleEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Period)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.High)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Low)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Open)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Close)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Badges)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Volume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BiasText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DayStoryText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DaySetupText)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ITText)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CandleStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CandleEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Period)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.High)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Low)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Open)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Close)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Badges)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Volume)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BiasText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DayStoryText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DaySetupText)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ITText)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,43 +1,100 @@
 ﻿@model MarkMachine.Data.Market
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Symbol;
 }
 
-<h2>Details</h2>
+<script>
+
+
+    function loadCandleViews() {
+
+        $.get("/RadChart?MarketId=@Model.MarketId", {},
+                  function (data) {
+                      $('#chart').html(data);
+                  },
+                  "html");
+
+        $.get("/Candles/Details?MarketId=@Model.MarketId", {},
+               function (data) {
+                   $('#candles').html(data);
+               },
+               "html");
+    }
+
+    $(document).ready(function () {
+
+        $("#loadingimg").hide();
+
+        loadCandleViews();
+
+
+        $("#buttonUpdate").click(function () {
+
+            console.log("Button Click");
+
+            var form_url = "/api/Markets/@Model.MarketId/Update";
+
+            console.log("GET issued to " + form_url);
+
+            $("#loadingimg").show();
+
+            var jqxhr = $.get(form_url, function (data) {
+                console.log("success");
+                $("#result").html(data);
+
+            })
+            .done(function () {
+                console.log("second success");
+                loadCandleViews();
+            })
+            .fail(function () {
+                console.log("error");
+            })
+            .always(function () {
+                $("#loadingimg").hide();
+                console.log("finished");
+
+            });
+
+        });
+
+    });
+
+</script>
+
+
+
+
 
 <fieldset>
-    <legend>Market</legend>
+    <legend>@Html.DisplayFor(model => model.Name)</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Symbol)
+
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Symbol)
+        <button class="btn btn-primary" id="buttonUpdate">Update</button>
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
+    
+
+    <div id="chart">
+
+        <img src="/Content/images/ajax-loader.gif" />
+
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CategoryId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CategoryId)
+    <div id="candles">
+
+        <img src="/Content/images/ajax-loader.gif" />
+
     </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ExchangeId)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ExchangeId)
-    </div>
+
+
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.MarketId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MarketId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
