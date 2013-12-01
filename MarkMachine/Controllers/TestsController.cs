@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using MarkMachine.Data;
+
 namespace MarkMachine.Controllers
 {
     public class TestsController : Controller
@@ -15,7 +17,13 @@ namespace MarkMachine.Controllers
         {
             MarketMachineClassLibrary.MarketUpdates mu = new MarketMachineClassLibrary.MarketUpdates();
 
-            mu.UpdateMarketHistorical(DateTime.Now.AddDays(-90), DateTime.Now, 4);
+            marketdbEntities mdb = new marketdbEntities();
+
+            foreach (Market m in mdb.Markets.Where(x=>x.CategoryId>1))
+            {
+
+                mu.UpdateMarketHistorical(DateTime.Now.AddDays(-180), DateTime.Now, m.MarketId);
+            }
 
             return View();
         }

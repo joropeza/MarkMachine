@@ -1,51 +1,26 @@
 ﻿@model IEnumerable<MarkMachine.Data.Market>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Markets";
 }
-
-<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Symbol)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExchangeId)
-        </th>
-        <th></th>
-    </tr>
+
+
+<div class="row">
+    <div class="col-md-3">@Html.DisplayNameFor(model => model.Symbol)</div>
+    <div class="col-md-6">.@Html.DisplayNameFor(model => model.Name)</div>
+    <div class="col-md-3">@Html.DisplayNameFor(model => model.CategoryId)</div>
+</div>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Symbol)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExchangeId)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MarketId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MarketId }) |
-            @Html.ActionLink("Candles","Index", new { controller="DailyCandles", id=item.MarketId })
-        </td>
-    </tr>
+    
+<div class="row">
+    <div class="col-md-3">@Html.ActionLink(item.Symbol, "Index", new { controller = "DailyCandles", id = item.MarketId })</div>
+    <div class="col-md-6">@Html.DisplayFor(modelItem => item.Name)</div>
+    <div class="col-md-3">@Html.DisplayFor(modelItem => item.CategoryId)</div>
+</div>
 }
-
-</table>
+    
