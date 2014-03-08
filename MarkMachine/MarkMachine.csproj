@@ -40,11 +40,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -60,9 +67,6 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -114,7 +118,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Telerik.Web.UI, Version=2012.2.912.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+    <Reference Include="Telerik.Web.UI, Version=2010.2.713.20, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Telerik.Web.UI.dll</HintPath>
     </Reference>
@@ -138,30 +142,6 @@
     <Compile Include="Controllers\MarketsController.cs" />
     <Compile Include="Controllers\RadChartController.cs" />
     <Compile Include="Controllers\TestsController.cs" />
-    <Compile Include="Data\DailyCandle.cs">
-      <DependentUpon>MarketDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Gap.cs">
-      <DependentUpon>MarketDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\Market.cs">
-      <DependentUpon>MarketDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\MarketDb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MarketDb.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\MarketDb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MarketDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Data\MarketDb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MarketDb.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,23 +214,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <EntityDeploy Include="Data\MarketDb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>MarketDb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Data\MarketDb.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MarketDb.edmx</DependentUpon>
-      <LastGenOutput>MarketDb.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Data\MarketDb.edmx.diagram">
-      <DependentUpon>MarketDb.edmx</DependentUpon>
-    </Content>
-    <Content Include="Data\MarketDb.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>MarketDb.edmx</DependentUpon>
-      <LastGenOutput>MarketDb.cs</LastGenOutput>
-    </Content>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -293,6 +256,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Views\Tests\" />
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +264,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MarketMachineCore\MarketMachineCore.csproj">
+      <Project>{80bb7bc2-081b-44c0-8624-55e57866ebb8}</Project>
+      <Name>MarketMachineCore</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

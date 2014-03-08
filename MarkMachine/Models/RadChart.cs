@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-using MarkMachine.Data;
+using MarketMachineCore.Data;
 
 namespace MarkMachine.Models
 {

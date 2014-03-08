@@ -5,7 +5,7 @@ using System.Web;
 using System.Net;
 using System.IO;
 using System.Text;
-using MarkMachine.Data;
+using MarketMachineCore.Data;
 
 namespace MarketMachineClassLibrary
 {
