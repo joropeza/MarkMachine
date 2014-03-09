@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketMachine", "MarketMach
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketMachineProcedures", "MarketMachineProcedures\MarketMachineProcedures.csproj", "{3B80C94F-B1E9-4193-AD84-1354F616C24F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketMachineConsoleApp", "MarketMachineConsoleApp\MarketMachineConsoleApp.csproj", "{12408F66-9836-412B-8BE0-9C89F60EB889}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3B80C94F-B1E9-4193-AD84-1354F616C24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B80C94F-B1E9-4193-AD84-1354F616C24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B80C94F-B1E9-4193-AD84-1354F616C24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12408F66-9836-412B-8BE0-9C89F60EB889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12408F66-9836-412B-8BE0-9C89F60EB889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12408F66-9836-412B-8BE0-9C89F60EB889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12408F66-9836-412B-8BE0-9C89F60EB889}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

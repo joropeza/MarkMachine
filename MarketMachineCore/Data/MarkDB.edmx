@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="CandleId" />
           </Key>
-          <Property Name="CandleId" Type="int" Nullable="false" />
+          <Property Name="CandleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MarketId" Type="int" Nullable="false" />
           <Property Name="PeriodId" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
