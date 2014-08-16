@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -7,7 +7,7 @@
 		<meta name="keywords" content="Admin, Dashboard, Bootstrap3, Sass, transform, CSS3, HTML5, Web design, UI Design, Responsive Dashboard, Responsive Admin, Admin Theme, Best Admin UI, Bootstrap Theme, Wrapbootstrap, Bootstrap" />
 		<meta name="author" content="Bootstrap Gallery" />
 		<link rel="shortcut icon" href="img/favicon.ico">
-		<title>Navigator Admin Panel</title>
+		<title>Markets Reference</title>
 		
 		<!-- Bootstrap CSS -->
 		<link href="css/bootstrap.css" rel="stylesheet" media="screen">
@@ -36,7 +36,7 @@
 
 	</head>  
 
-	<body>
+	<body >
 
 		<!-- Header Start -->
 		<header>
@@ -425,33 +425,14 @@
 		<div class="dashboard-wrapper">
 
 			<!-- Main Container Start -->
-			<div class="main-container">
+			<div class="main-container" ui-view>
 
 				<!-- Top Bar Starts -->
 				<div class="top-bar">
 					<div class="page-title">
-						Dashboard
+						Market Machine {{message}}
 					</div>
-					<ul class="stats hidden-xs">
-						<li>
-							<div class="ststs-block rubberBand animated pull-left hidden-sm">
-								<canvas id="doughnutChart2"></canvas>
-							</div>
-							<div class="stats-details">
-								<h4>$<span id="today_income">580</span> <i class="fa fa-caret-up up"></i></h4>
-								<h5>Today's Income</h5>
-							</div>
-						</li>
-						<li>
-							<div class="ststs-block rubberBand animated pull-left hidden-sm">
-								<canvas id="doughnutChart3"></canvas>
-							</div>
-							<div class="stats-details">
-								<h4>$<span id="today_expenses">235</span> <i class="fa fa-caret-down down"></i></h4>
-								<h5>Today's Expenses</h5>
-							</div>
-						</li>
-					</ul>
+					
 				</div>
 				<!-- Top Bar Ends -->
 
@@ -460,39 +441,7 @@
 
 					<hr class="stylish">
 
-					<!-- Current Stats Start -->
-					<div class="current-stats">
-						<div class="row">
-							<div class="col-md-8 col-sm-12 col-xs-12">
-								<canvas id="lineChart" class="chart-height"></canvas>
-							</div>
-							
-							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="referrals">
-									<div class="list fb-bg center-align-text">
-										<small class="text-white">Facebook</small>
-										<h3 class="no-margin no-padding">37%</h3>
-									</div>
-									<div class="list twitter-bg center-align-text">
-										<small class="text-white">Twitter</small>
-										<h3 class="no-margin no-padding text-white">23%</h3>
-									</div>
-									<div class="list gplus-bg center-align-text">
-										<small class="text-white">Google Plus</small>
-										<h3 class="no-margin no-padding">17%</h3>
-									</div>
-									<div class="list linkedin-bg center-align-text">
-										<small class="text-white">LinkedIn</small>
-										<h3 class="no-margin no-padding">23%</h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- Current Stats End -->
-
-					<hr class="stylish">
-
+					
 					<!-- Spacer Starts -->
 					<div class="spacer">
 
@@ -501,7 +450,7 @@
 							<div class="col-md-8 col-sm-12 col-xs-12">
 								<div class="panel">
 									<div class="panel-heading">
-										<h4 class="panel-title">Ongoing Projects</h4>
+										<h4 class="panel-title">Hot Markets</h4>
 										<a href="#" class="custom-icon" data-toggle="tooltip" data-placement="top" title="Edit">
 											<i class="fa fa-pencil"></i>
 										</a>
@@ -707,152 +656,30 @@
 								</div>
 							</div>
 							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="panel">
-									<div class="panel-heading">
-										<h4 class="panel-title">Advertising Stats</h4>
-										<a href="#" class="custom-icon" data-toggle="tooltip" data-placement="top" title="Info">
-											<i class="fa fa-info"></i>
-										</a>
+								<div class="referrals">
+									<div class="list fb-bg center-align-text">
+										<small class="text-white">Facebook</small>
+										<h3 class="no-margin no-padding">37%</h3>
 									</div>
-									<div class="panel-body center-align-text">
-										<canvas id="polarAreaChart" class="chart-height-xs"></canvas>
-										<ul class="show-stats">
-											<li>
-												<i class="fa fa-circle-thin text-success"></i>
-												Telivision <span>22%</span>
-											</li>
-											<li>
-												<i class="fa fa-circle-thin text-warning"></i>
-												Press <span>11%</span>
-											</li>
-											<li>
-												<i class="fa fa-circle-thin text-danger"></i>
-												Internet <span>40%</span>
-											</li>
-											<li>
-												<i class="fa fa-circle-thin text-info"></i>
-												Friends <span>17%</span>
-											</li>
-											<li>
-												<i class="fa fa-circle-thin text-warning"></i>
-												Other <span>10%</span>
-											</li>
-										</ul>
+									<div class="list twitter-bg center-align-text">
+										<small class="text-white">Twitter</small>
+										<h3 class="no-margin no-padding text-white">23%</h3>
+									</div>
+									<div class="list gplus-bg center-align-text">
+										<small class="text-white">Google Plus</small>
+										<h3 class="no-margin no-padding">17%</h3>
+									</div>
+									<div class="list linkedin-bg center-align-text">
+										<small class="text-white">LinkedIn</small>
+										<h3 class="no-margin no-padding">23%</h3>
 									</div>
 								</div>
+							
 							</div>
 						</div>
 						<!-- Row Ends -->
 
-						<!-- Row Starts -->
-						<div class="row">
-							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="panel">
-									<div class="panel-body">
-										<ul class="list-group">
-											<li class="list-group-item info">
-												<span class="label">3267</span>
-												Blog
-											</li>
-											<li class="list-group-item info">
-												<span class="label">667</span>
-												About Us
-											</li>
-											<li class="list-group-item info">
-												<span class="label">892</span>
-												Dashboard
-											</li>
-											<li class="list-group-item info">
-												<span class="label">431</span>
-												Contact US
-											</li>
-											<li class="list-group-item info">
-												<span class="label">159</span>
-												Help
-											</li>
-										</ul>
-										<h3 class="panel-title">Most Viewed Pages</h3>
-									</div>
-									<div class="panel-footer">
-										<ul class="clearfix">
-											<li>
-												<p>Mumbai</p>
-												<h4 class="text-danger">30<small>%</small></h4>
-											</li>
-											<li>
-												<p>Berlin</p>
-												<h4 class="text-info">24<small>%</small></h4>
-											</li>
-											<li>
-												<p>Miami</p>
-												<h4 class="text-success">28<small>%</small></h4>
-											</li>
-											<li>
-												<p>Sydney</p>
-												<h4 class="text-warning">18<small>%</small></h4>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="panel">
-									<div class="panel-body">
-										<canvas id="barChart" class="chart-height-sm"></canvas>
-										<h3 class="panel-title">Top Search Items</h3>
-									</div>
-									<div class="panel-footer">
-										<ul class="clearfix">
-											<li>
-												<p>Sachin</p>
-												<h4 class="text-danger">22<small>%</small></h4>
-											</li>
-											<li>
-												<p>Modi</p>
-												<h4 class="text-info">32<small>%</small></h4>
-											</li>
-											<li>
-												<p>Google</p>
-												<h4 class="text-success">26<small>%</small></h4>
-											</li>
-											<li>
-												<p>Yahoo</p>
-												<h4 class="text-warning">10<small>%</small></h4>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-12 col-xs-12">
-								<div class="panel">
-									<div class="panel-body">
-										<canvas id="pieChart" class="chart-height-sm"></canvas>
-										<h3 class="panel-title">OS Statistics 2013</h3>
-									</div>
-									<div class="panel-footer">
-										<ul class="clearfix">
-											<li>
-												<p>Chrome</p>
-												<h4 class="text-danger">36<small>%</small></h4>
-											</li>
-											<li>
-												<p>Firefox</p>
-												<h4 class="text-info">30<small>%</small></h4>
-											</li>
-											<li>
-												<p>Safari</p>
-												<h4 class="text-success">22<small>%</small></h4>
-											</li>
-											<li>
-												<p>Explorer</p>
-												<h4 class="text-warning">12<small>%</small></h4>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Row Ends -->
+						
 
 						<!-- Row Starts -->
 						<div class="row">
@@ -989,6 +816,20 @@
 
 		<!-- Custom Index -->
 		<script src="js/custom-index.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular-cookies.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular-mocks.js"></script>
+
+    <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+
+
+     <script src="app/app.js"></script>
+     <script src="app/marketApp.js"></script>
+
 		
 	</body>
 </html>
