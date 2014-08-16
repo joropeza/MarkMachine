@@ -8,7 +8,7 @@ namespace MarketMachineClassLibrary
 {
     public class MarketUpdates
     {
-        marketdbEntities mde = new marketdbEntities();
+        MarketsDBEntities mde = new MarketsDBEntities();
 
         
        

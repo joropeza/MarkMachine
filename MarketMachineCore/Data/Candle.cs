@@ -23,7 +23,7 @@ namespace MarketMachineCore.Data
         public decimal Low { get; set; }
         public decimal Open { get; set; }
         public decimal Close { get; set; }
-        public Nullable<int> Volume { get; set; }
+        public int Volume { get; set; }
     
         public virtual Market Market { get; set; }
     }

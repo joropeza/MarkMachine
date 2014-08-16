@@ -38,7 +38,7 @@ namespace MarkMachine.Models
 
             // creating a series and adding it to the chart
 
-            marketdbEntities dba = new marketdbEntities();
+            MarketsDBEntities dba = new MarketsDBEntities();
 
             Market m = dba.Markets.Find(MarketId);
 

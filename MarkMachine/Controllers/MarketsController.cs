@@ -11,7 +11,7 @@ namespace MarkMachine.Controllers
 {
     public class MarketsController : Controller
     {
-        private marketdbEntities db = new marketdbEntities();
+        private MarketsDBEntities db = new MarketsDBEntities();
 
         //
         // GET: /Markets/

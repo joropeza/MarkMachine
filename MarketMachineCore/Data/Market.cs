@@ -16,9 +16,9 @@ namespace MarketMachineCore.Data
     {
         public Market()
         {
+            this.Candles = new HashSet<Candle>();
             this.DailyCandles = new HashSet<DailyCandle>();
             this.Gaps = new HashSet<Gap>();
-            this.Candles = new HashSet<Candle>();
         }
     
         public int MarketId { get; set; }
@@ -27,8 +27,8 @@ namespace MarketMachineCore.Data
         public int CategoryId { get; set; }
         public int ExchangeId { get; set; }
     
+        public virtual ICollection<Candle> Candles { get; set; }
         public virtual ICollection<DailyCandle> DailyCandles { get; set; }
         public virtual ICollection<Gap> Gaps { get; set; }
-        public virtual ICollection<Candle> Candles { get; set; }
     }
 }

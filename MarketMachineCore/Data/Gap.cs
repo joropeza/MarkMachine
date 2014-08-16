@@ -18,8 +18,8 @@ namespace MarketMachineCore.Data
         public int MarketId { get; set; }
         public System.DateTime OpenDate { get; set; }
         public string Direction { get; set; }
-        public decimal Top { get; set; }
-        public decimal Bottom { get; set; }
+        public decimal GapTop { get; set; }
+        public decimal GapBottom { get; set; }
         public Nullable<System.DateTime> TestDate { get; set; }
         public decimal GapExtension { get; set; }
         public Nullable<System.DateTime> ExtendDate { get; set; }

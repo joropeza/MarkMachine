@@ -17,7 +17,7 @@ namespace MarkMachine.Controllers
         {
             MarketMachineClassLibrary.MarketUpdates mu = new MarketMachineClassLibrary.MarketUpdates();
 
-            marketdbEntities mdb = new marketdbEntities();
+            MarketsDBEntities mdb = new MarketsDBEntities();
 
             foreach (Market m in mdb.Markets.Where(x=>x.CategoryId>1))
             {

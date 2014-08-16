@@ -12,7 +12,7 @@ namespace MarketMachine.Controllers
 {
     public class MarketsController : ApiController
     {
-        marketdbEntities mdb = new marketdbEntities();
+        MarketsDBEntities mdb = new MarketsDBEntities();
 
 
         [Route("Markets")]

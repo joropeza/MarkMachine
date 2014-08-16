@@ -13,7 +13,7 @@ namespace MarketMachineProcedures
         {
             //grab the list of currently active markets
             List<int> MarketList = new List<int>();
-            MarketList.Add(2);
+            MarketList.Add(1);
 
             foreach (var m in MarketList)
             {
@@ -32,7 +32,7 @@ namespace MarketMachineProcedures
 
             //make sure each period's candles have been entered
 
-            cp.CatchUpDailyCandles(2);            
+            cp.CatchUpDailyCandles(MarketId);            
 
             //catch up the current W and M candles
 

@@ -13,10 +13,10 @@ namespace MarketMachineCore.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class marketdbEntities : DbContext
+    public partial class MarketsDBEntities : DbContext
     {
-        public marketdbEntities()
-            : base("name=marketdbEntities")
+        public MarketsDBEntities()
+            : base("name=MarketsDBEntities")
         {
         }
     
@@ -25,9 +25,9 @@ namespace MarketMachineCore.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<DailyCandle> DailyCandles { get; set; }
-        public virtual DbSet<Gap> Gaps { get; set; }
         public virtual DbSet<Market> Markets { get; set; }
         public virtual DbSet<Candle> Candles { get; set; }
+        public virtual DbSet<DailyCandle> DailyCandles { get; set; }
+        public virtual DbSet<Gap> Gaps { get; set; }
     }
 }
