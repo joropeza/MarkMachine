@@ -1,23 +1,18 @@
 
 'use strict'
 
-angular.module('markets', ['ngCookies'])
+angular.module('markets', ['ngCookies','ngRoute'])
 
-.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
-	var base_url = "/VEFrontEnd/";
-	$stateProvider
-	.state('home', {
-		url: "/",
-		controller: 'HomeController',
-		authenticate: false
-	})
-	$urlRouterProvider.otherwise("/");
+.config([ '$routeProvider', function($routeProvider) {
+	$routeProvider.
+                when('/', {templateUrl: 'app/routes/home.tpl.html',   controller: "HomeController"}).
+                otherwise({redirectTo: '/'});
 }])
 
-.controller('HomeController', ['$scope', '$stateParams', '$state', , function ($scope, $stateParams, $state) {
+.controller('HomeController', ['$scope' , function ($scope, $stateParams, $state) {
 
 	$scope.message = "hello jonny";
-	
+	alert("here");
 }])
 
 .service('marketService', ['$http', '$location', function ($http, $location) {

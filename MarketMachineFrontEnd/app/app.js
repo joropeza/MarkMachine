@@ -1,11 +1,9 @@
 
 
-angular.module('app', ['ui.router', 'markets', 'ngMockE2E'])
-.run(function ($rootScope, $state, $location, $stateParams, $httpBackend) {
-    $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
 
-        
-    });
+angular.module('app', ['markets', 'ngMockE2E', 'ngRoute'])
+.run(function ($rootScope, $location, $httpBackend) {
+    
 
     var JSON = {};
 
