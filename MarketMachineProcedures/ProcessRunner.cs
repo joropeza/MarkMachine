@@ -9,6 +9,13 @@ namespace MarketMachineProcedures
     public class ProcessRunner
     {
 
+        public void UpdateMarket(int MarketId)
+        {
+            MarketUpdates mu = new MarketUpdates();
+            mu.UpdateMarketHistorical(DateTime.Now.AddYears(-1), DateTime.Now, MarketId);
+
+        }
+
         public void CandleCatchupAll()
         {
             //grab the list of currently active markets

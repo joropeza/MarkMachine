@@ -5,7 +5,7 @@ angular.module('app', ['markets', 'ngMockE2E', 'ngRoute'])
 .run(function ($rootScope, $location, $httpBackend) {
     
 
-    var JSON = {};
+    var JSON = [{ "$id": "1", "symbol": "SPY", "name": "Spyder S&P" }];
 
     	
 

@@ -65,6 +65,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.js" />
+    <Content Include="app\marketApp.js" />
+    <Content Include="app\modals\share.tpl.html" />
+    <Content Include="app\routes\home.tpl.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
