@@ -31,16 +31,16 @@
 											<table class="table" id="data-table">    
 												<thead>
 													<tr>
-														<th style="width:15%">Sl.no</th>
-														<th style="width:45%">Project</th>
+														<th style="width:15%">Mkt</th>
+														<th style="width:45%">Name</th>
 														<th style="width:25%">Progress</th>
 														<th style="width:15%">Price</th>
 													</tr>
 												</thead>
 												<tbody>
-													<tr class="gradeA">
-														<td>001</td>
-														<td>Responsive Website <strong class="text-warning">low</strong></td>
+													<tr class="gradeA" ng-repeat="market in markets">
+														<td><a ng-href="#/details/{{market.marketId}}">{{market.symbol}}</a></td>
+														<td>{{market.name}} <strong class="text-warning">low</strong></td>
 														<td>
 															<div class="progress">
 																<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
@@ -48,178 +48,10 @@
 															</div>
 														</td>
 														<td>
-															<span class="text-warning">$839</span>
+															<span class="text-warning">{{market.price}}</span>
 														</td>
 													</tr>
-													<tr class="gradeC">
-														<td>002</td>
-														<td>Brochure Design <strong class="text-info">normal</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-info">$2187</span>
-														</td>
-													</tr>
-													<tr class="gradeU">
-														<td>003</td>
-														<td>Mobile App <strong class="text-danger">high</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-danger">$490</span>
-														</td>
-													</tr>
-													<tr class="gradeA">
-														<td>004</td>
-														<td>Graphic Design <strong class="text-info">normal</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-info">$280</span>
-														</td>
-													</tr>
-													<tr class="gradeU">
-														<td>005</td>
-														<td>Html Convertion <strong class="text-success">completed</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-success">$110</span>
-														</td>
-													</tr>
-													<tr class="gradeX">
-														<td>006</td>
-														<td>Photoshop Design <strong class="text-danger">high</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-danger">$27</span>
-														</td>
-													</tr>
-													<tr class="gradeC">
-														<td>007</td>
-														<td>Invoice Design <strong class="text-success">completed</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-success">$600</span>
-														</td>
-													</tr>
-													<tr class="gradeA">
-														<td>008</td>
-														<td>Web App <strong class="text-info">normal</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-info">$839</span>
-														</td>
-													</tr>
-													<tr class="gradeC">
-														<td>009</td>
-														<td>Android App <strong class="text-success">completed</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-success">$2187</span>
-														</td>
-													</tr>
-													<tr class="gradeU">
-														<td>010</td>
-														<td>Invoice Design <strong class="text-danger">high</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-danger">$490</span>
-														</td>
-													</tr>
-													<tr class="gradeA">
-														<td>011</td>
-														<td>Design Portfolio <strong class="text-info">normal</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-info">$1184</span>
-														</td>
-													</tr>
-													<tr class="gradeC">
-														<td>012</td>
-														<td>Dashboard Design <strong class="text-danger">high</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-danger">$2600</span>
-														</td>
-													</tr>
-													<tr class="gradeC">
-														<td>013</td>
-														<td>Brochure Designs <strong class="text-info">normal</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-info">$2600</span>
-														</td>
-													</tr>
-													<tr class="gradeC">
-														<td>012</td>
-														<td>Email Manager <strong class="text-warning">low</strong></td>
-														<td>
-															<div class="progress">
-																<div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-																</div>
-															</div>
-														</td>
-														<td>
-															<span class="text-warning">$2600</span>
-														</td>
-													</tr>
+													
 												</tbody>
 											</table>
 										</div>
