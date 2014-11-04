@@ -1,5 +1,8 @@
 
 'use strict'
+google.load("visualization", "1", {
+                packages: ["corechart"]
+            });
 
 angular.module('markets', ['ngCookies','ngRoute', 'LocalStorageModule'])
 
@@ -37,6 +40,34 @@ angular.module('markets', ['ngCookies','ngRoute', 'LocalStorageModule'])
             $scope.message = response.name;
     
             $scope.market = response;
+
+            var chartData = [];
+
+            $scope.market.days.forEach(function(entry) {
+                
+                var day = [entry.date,entry.low,entry.open,entry.close,entry.high];
+                chartData.push(day);
+                console.log(day);
+
+            });
+            
+           
+  var data = google.visualization.arrayToDataTable(
+    chartData
+    // Treat first row as data as well.
+    , true);
+
+  var options = {
+    legend: 'none',
+    width: 'auto',
+    height: '280',
+    backgroundColor: 'transparent',
+    colors: [$red, $blue, $green, $yellow],
+  };
+
+  var chart = new google.visualization.CandlestickChart(document.getElementById('candlestick_chart'));
+  chart.draw(data, options);
+  
 
     });
     
