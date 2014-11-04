@@ -286,7 +286,7 @@ function drawTable() {
 //Candlestick Chart
 function candlestick() {
   var data = google.visualization.arrayToDataTable([
-    ['Mon', 20, 28, 38, 45],
+    ['Mon', 5, 28, 38, 45],
     ['Tue', 31, 38, 55, 66],
     ['Wed', 50, 55, 77, 80],
     ['Thu', 77, 47, 56, 50],
