@@ -5,13 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bc7d32368bda4997a033da77530af12c" Name="Diagram1">
-        <EntityTypeShape EntityType="MarketsDBModel.Market" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MarketsDBModel.Candle" Width="1.5" PointX="3" PointY="8.625" />
         <EntityTypeShape EntityType="MarketsDBModel.DailyCandle" Width="1.5" PointX="3" PointY="12.5" />
         <EntityTypeShape EntityType="MarketsDBModel.Gap" Width="1.5" PointX="3" PointY="16" />
+        <AssociationConnector Association="MarketsDBModel.FK_Gaps_DailyCandles" />
+        <EntityTypeShape EntityType="MarketsDBModel.Market" Width="1.5" PointX="0.75" PointY="12.75" />
+        <EntityTypeShape EntityType="MarketsDBModel.MarketType" Width="1.5" PointX="0.75" PointY="9.375" />
         <AssociationConnector Association="MarketsDBModel.FK_Candles_Markets" />
         <AssociationConnector Association="MarketsDBModel.FK_DailyCandles_Markets" />
         <AssociationConnector Association="MarketsDBModel.FK_Gaps_Markets" />
+        <AssociationConnector Association="MarketsDBModel.FK_Markets_MarketTypes" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,11 @@ namespace MarketMachineCore.Data
     
     public partial class DailyCandle
     {
+        public DailyCandle()
+        {
+            this.Gaps = new HashSet<Gap>();
+        }
+    
         public int DailyCandleId { get; set; }
         public int MarketId { get; set; }
         public System.DateTime Date { get; set; }
@@ -23,6 +28,7 @@ namespace MarketMachineCore.Data
         public decimal Close { get; set; }
         public int Volume { get; set; }
     
+        public virtual ICollection<Gap> Gaps { get; set; }
         public virtual Market Market { get; set; }
     }
 }

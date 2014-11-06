@@ -24,11 +24,13 @@ namespace MarketMachineCore.Data
         public int MarketId { get; set; }
         public string Symbol { get; set; }
         public string Name { get; set; }
-        public int CategoryId { get; set; }
+        public int MarketTypeId { get; set; }
         public int ExchangeId { get; set; }
+        public Nullable<decimal> CurrentPrice { get; set; }
     
         public virtual ICollection<Candle> Candles { get; set; }
         public virtual ICollection<DailyCandle> DailyCandles { get; set; }
         public virtual ICollection<Gap> Gaps { get; set; }
+        public virtual MarketType MarketType { get; set; }
     }
 }
