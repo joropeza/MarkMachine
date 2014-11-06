@@ -4,10 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using MarketMachineCore.Data;
+
 namespace MarketMachineProcedures
 {
     public class ProcessRunner
     {
+
+        public void UpdateMarkets()
+        {
+            MarketUpdates mu = new MarketUpdates();
+
+            using (MarketsDBEntities mde = new MarketsDBEntities()) 
+            {
+                foreach (var m in mde.Markets) { 
+                mu.UpdateMarketHistorical(DateTime.Now.AddYears(-1), DateTime.Now, m.MarketId);
+                }
+            }
+
+        }
 
         public void UpdateMarket(int MarketId)
         {

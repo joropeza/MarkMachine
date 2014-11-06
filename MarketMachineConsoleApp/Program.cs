@@ -13,7 +13,7 @@ namespace MarketMachineConsoleApp
         static void Main(string[] args)
         {
             ProcessRunner pr = new ProcessRunner();
-            pr.UpdateMarket(1);
+            pr.UpdateMarkets();
             pr.CandleCatchupAll();
             
             Console.ReadLine();
