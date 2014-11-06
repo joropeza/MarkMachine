@@ -10,6 +10,23 @@ namespace MarketMachineProcedures
 {
     public class ProcessRunner
     {
+		public void GapFinder (int marketId)
+		{
+			using (MarketsDBEntities mde = new MarketsDBEntities()) 
+			{
+			//find all candles that don't have a corresponding gap
+				var candles = mde.DailyCandles.Where (x => x.MarketId == marketId);
+
+				foreach (var candle in candles.OrderBy(x=>x.Date){
+
+
+
+
+				}
+
+
+			}
+		}
 
         public void UpdateMarkets()
         {
