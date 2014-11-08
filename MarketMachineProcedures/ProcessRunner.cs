@@ -33,6 +33,103 @@ namespace MarketMachineProcedures
 
         }
 
+        public void FillUnfilledGaps()
+        {
+            using (MarketsDBEntities mde = new MarketsDBEntities())
+            {
+                foreach (var gap in mde.Gaps.Where(x => x.FillDate == null))
+                {
+                    var candles = mde.DailyCandles.Where(x => x.MarketId == gap.MarketId && x.Date > gap.OpenDate);
+                    foreach (var candle in candles)
+                    {
+                        if (gap.Direction == "Up")
+                        {
+                            if (candle.Low <= gap.GapBottom)
+                            {
+                                Console.WriteLine("Gap fill on " + candle.Date.ToShortDateString());
+                                gap.FillDate = candle.Date;
+                                break;
+                            }
+
+
+                        }
+                        else
+                        {
+                            if (candle.High >= gap.GapTop)
+                            {
+                                Console.WriteLine("Gap fill on " + candle.Date.ToShortDateString());
+                                gap.FillDate = candle.Date;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                mde.SaveChanges();
+            }
+        }
+
+        public void FirstAndLastDates()
+        {
+            using (MarketsDBEntities mde = new MarketsDBEntities())
+            {
+                foreach (var m in mde.Markets)
+                {
+                    m.DateFirstCandle = m.DailyCandles.OrderBy(x => x.Date).First().Date;
+                    m.DateLastCandle = m.DailyCandles.OrderByDescending(x => x.Date).First().Date;
+                    
+                }
+
+                mde.SaveChanges();
+            }
+
+        }
+
+        public void GapStats()
+        {
+            using (MarketsDBEntities mde = new MarketsDBEntities())
+            {
+                foreach (var m in mde.Markets)
+                {
+                    int marketId = m.MarketId;
+                    //get all unfilled gaps
+                    var market = mde.Markets.Find(marketId);
+                    var gaps = market.Gaps.Where(x => x.MarketId == marketId && x.FillDate == null);
+
+
+                    //ordered by date, which direction is the last unfilled gap?
+                    var lastGap = gaps.OrderByDescending(x => x.OpenDate).FirstOrDefault();
+
+                    if (lastGap.OpenDate > DateTime.Now.AddYears(-100))
+                    {
+                        market.GapsCurrentDirection = lastGap.Direction;
+                        if (lastGap.Direction == "Up")
+                            market.GapsFirstPrice = lastGap.GapTop;
+                        else
+                            market.GapsFirstPrice = lastGap.GapBottom;
+                    }
+
+                    
+                }
+
+                mde.SaveChanges();
+
+            }
+        }
+
+        public void GapFinders()
+        {
+            MarketUpdates mu = new MarketUpdates();
+
+            using (MarketsDBEntities mde = new MarketsDBEntities())
+            {
+                foreach (var m in mde.Markets)
+                {
+                    GapFinder(m.MarketId);
+                }
+            }
+
+        }
 
 		public void GapFinder (int marketId)
 		{
@@ -122,8 +219,9 @@ namespace MarketMachineProcedures
 
             using (MarketsDBEntities mde = new MarketsDBEntities()) 
             {
-                foreach (var m in mde.Markets) { 
-                mu.UpdateMarketHistorical(DateTime.Now.AddYears(-1), DateTime.Now, m.MarketId);
+                foreach (var m in mde.Markets) {
+                    Console.WriteLine("Updating data for " + m.Name);
+                mu.UpdateMarketHistorical(DateTime.Now.AddYears(-5), DateTime.Now, m.MarketId);
                 }
             }
 
@@ -134,6 +232,58 @@ namespace MarketMachineProcedures
             MarketUpdates mu = new MarketUpdates();
             mu.UpdateMarketHistorical(DateTime.Now.AddYears(-1), DateTime.Now, MarketId);
 
+        }
+
+        public void GenerateMonthlyCandles(int marketId)
+        {
+            using (MarketsDBEntities mde = new MarketsDBEntities())
+            {
+                var candles = mde.DailyCandles.Where(x => x.MarketId == marketId)
+                    .OrderBy(x => x.Date)
+                    .GroupBy(x => x.Date.Month.ToString() + "-" + x.Date.Year.ToString())
+                    .Select(x => new CandleListItem { MarketId = marketId,
+                        StartDate = x.Min(y => y.Date),
+                        High = x.Max(y => y.High),
+                        Low = x.Min(y => y.High),
+                        Open = 0,
+                        Close = 0,
+                        Volume = x.Sum(y => y.Volume),
+                    
+                    });
+
+
+                foreach (CandleListItem candle in candles)
+                {
+                    //get open and close
+
+                    var dailyCandles = mde.DailyCandles.Where(x => x.MarketId == marketId && x.Date.Month == candle.StartDate.Month && x.Date.Year == candle.StartDate.Year).OrderBy(x => x.Date);
+                    candle.Open = dailyCandles.First().Open;
+                    candle.Close = dailyCandles.OrderByDescending(x => x.Date).First().Close;
+
+                    Candle c = new Candle();
+                    c.Close = candle.Close;
+                    c.EndDate = dailyCandles.OrderByDescending(x => x.Date).First().Date;
+                    c.High = candle.High;
+                    c.Low = candle.Low;
+                    c.MarketId = marketId;
+                    c.Open = candle.Open;
+                    c.PeriodId = 2;
+                    c.StartDate = candle.StartDate;
+                    c.Volume = candle.Volume;
+
+                    if (mde.Candles.Where(x=>x.MarketId == marketId && x.StartDate == c.StartDate && x.PeriodId == c.PeriodId).Count() == 0)
+                    {
+                        using (MarketsDBEntities mdeSaver = new MarketsDBEntities())
+                        {
+                            mdeSaver.Candles.Add(c);
+                            mdeSaver.SaveChanges();
+                        }
+                    }
+
+                    Console.WriteLine(candle.StartDate.ToShortDateString() + " H:" + candle.High);
+                }
+                
+            }
         }
 
         public void CandleCatchupAll()
@@ -169,4 +319,19 @@ namespace MarketMachineProcedures
 
         }
     }
+
+    public class CandleListItem
+    {
+        public int MarketId { get; set; }
+        public DateTime StartDate { get; set; }
+        public Decimal High { get; set; }
+        public Decimal Low { get; set; }
+        public Decimal Open { get; set; }
+        public Decimal Close { get; set; }
+        public Int64 Volume { get; set; }
+
+
+
+    }
+    
 }

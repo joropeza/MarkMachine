@@ -25,10 +25,10 @@ namespace MarketMachineCore.Data
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Candle> Candles { get; set; }
-        public virtual DbSet<DailyCandle> DailyCandles { get; set; }
         public virtual DbSet<Gap> Gaps { get; set; }
         public virtual DbSet<Market> Markets { get; set; }
         public virtual DbSet<MarketType> MarketTypes { get; set; }
+        public virtual DbSet<Candle> Candles { get; set; }
+        public virtual DbSet<DailyCandle> DailyCandles { get; set; }
     }
 }

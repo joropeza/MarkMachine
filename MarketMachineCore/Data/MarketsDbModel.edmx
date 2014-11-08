@@ -18,7 +18,7 @@
           <Property Name="Low" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Open" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Close" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Volume" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="DailyCandles">
           <Key>
@@ -31,7 +31,7 @@
           <Property Name="Low" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Open" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Close" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Volume" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Gaps">
           <Key>
@@ -60,6 +60,12 @@
           <Property Name="MarketTypeId" Type="int" Nullable="false" />
           <Property Name="ExchangeId" Type="int" Nullable="false" />
           <Property Name="CurrentPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="GapsCurrentDirection" Type="nvarchar" MaxLength="5" />
+          <Property Name="GapsCurrentDirectionCount" Type="int" />
+          <Property Name="GapsTotalOpen" Type="int" />
+          <Property Name="GapsFirstPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="DateFirstCandle" Type="datetime" />
+          <Property Name="DateLastCandle" Type="datetime" />
         </EntityType>
         <EntityType Name="MarketTypes">
           <Key>
@@ -160,23 +166,9 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MarketsDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MarketsDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Candles" EntityType="MarketsDBModel.Candle" />
-          <EntitySet Name="DailyCandles" EntityType="MarketsDBModel.DailyCandle" />
           <EntitySet Name="Gaps" EntityType="MarketsDBModel.Gap" />
-          <AssociationSet Name="FK_Gaps_DailyCandles" Association="MarketsDBModel.FK_Gaps_DailyCandles">
-            <End Role="DailyCandle" EntitySet="DailyCandles" />
-            <End Role="Gap" EntitySet="Gaps" />
-          </AssociationSet>
           <EntitySet Name="Markets" EntityType="MarketsDBModel.Market" />
           <EntitySet Name="MarketTypes" EntityType="MarketsDBModel.MarketType" />
-          <AssociationSet Name="FK_Candles_Markets" Association="MarketsDBModel.FK_Candles_Markets">
-            <End Role="Market" EntitySet="Markets" />
-            <End Role="Candle" EntitySet="Candles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DailyCandles_Markets" Association="MarketsDBModel.FK_DailyCandles_Markets">
-            <End Role="Market" EntitySet="Markets" />
-            <End Role="DailyCandle" EntitySet="DailyCandles" />
-          </AssociationSet>
           <AssociationSet Name="FK_Gaps_Markets" Association="MarketsDBModel.FK_Gaps_Markets">
             <End Role="Market" EntitySet="Markets" />
             <End Role="Gap" EntitySet="Gaps" />
@@ -185,38 +177,21 @@
             <End Role="MarketType" EntitySet="MarketTypes" />
             <End Role="Market" EntitySet="Markets" />
           </AssociationSet>
+          <EntitySet Name="Candles" EntityType="MarketsDBModel.Candle" />
+          <AssociationSet Name="FK_Candles_Markets" Association="MarketsDBModel.FK_Candles_Markets">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="Candle" EntitySet="Candles" />
+          </AssociationSet>
+          <EntitySet Name="DailyCandles" EntityType="MarketsDBModel.DailyCandle" />
+          <AssociationSet Name="FK_DailyCandles_Markets" Association="MarketsDBModel.FK_DailyCandles_Markets">
+            <End Role="Market" EntitySet="Markets" />
+            <End Role="DailyCandle" EntitySet="DailyCandles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Gaps_DailyCandles" Association="MarketsDBModel.FK_Gaps_DailyCandles">
+            <End Role="DailyCandle" EntitySet="DailyCandles" />
+            <End Role="Gap" EntitySet="Gaps" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Candle">
-          <Key>
-            <PropertyRef Name="CandleId" />
-          </Key>
-          <Property Name="CandleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MarketId" Type="Int32" Nullable="false" />
-          <Property Name="PeriodId" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Open" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Close" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Volume" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Market" Relationship="MarketsDBModel.FK_Candles_Markets" FromRole="Candle" ToRole="Market" />
-        </EntityType>
-        <EntityType Name="DailyCandle">
-          <Key>
-            <PropertyRef Name="DailyCandleId" />
-          </Key>
-          <Property Name="DailyCandleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MarketId" Type="Int32" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Open" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Close" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Volume" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Gaps" Relationship="MarketsDBModel.FK_Gaps_DailyCandles" FromRole="DailyCandle" ToRole="Gap" />
-          <NavigationProperty Name="Market" Relationship="MarketsDBModel.FK_DailyCandles_Markets" FromRole="DailyCandle" ToRole="Market" />
-        </EntityType>
         <EntityType Name="Gap">
           <Key>
             <PropertyRef Name="GapId" />
@@ -232,22 +207,10 @@
           <Property Name="ExtendDate" Type="DateTime" Precision="3" />
           <Property Name="FillDate" Type="DateTime" Precision="3" />
           <Property Name="DailyCandleId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DailyCandle" Relationship="MarketsDBModel.FK_Gaps_DailyCandles" FromRole="Gap" ToRole="DailyCandle" />
           <Property Name="GapSize" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="Market" Relationship="MarketsDBModel.FK_Gaps_Markets" FromRole="Gap" ToRole="Market" />
+          <NavigationProperty Name="DailyCandle" Relationship="MarketsDBModel.FK_Gaps_DailyCandles" FromRole="Gap" ToRole="DailyCandle" />
         </EntityType>
-        <Association Name="FK_Gaps_DailyCandles">
-          <End Type="MarketsDBModel.DailyCandle" Role="DailyCandle" Multiplicity="1" />
-          <End Type="MarketsDBModel.Gap" Role="Gap" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DailyCandle">
-              <PropertyRef Name="DailyCandleId" />
-            </Principal>
-            <Dependent Role="Gap">
-              <PropertyRef Name="DailyCandleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Market">
           <Key>
             <PropertyRef Name="MarketId" />
@@ -258,10 +221,16 @@
           <Property Name="MarketTypeId" Type="Int32" Nullable="false" />
           <Property Name="ExchangeId" Type="Int32" Nullable="false" />
           <Property Name="CurrentPrice" Type="Decimal" Precision="18" Scale="2" />
-          <NavigationProperty Name="Candles" Relationship="MarketsDBModel.FK_Candles_Markets" FromRole="Market" ToRole="Candle" />
-          <NavigationProperty Name="DailyCandles" Relationship="MarketsDBModel.FK_DailyCandles_Markets" FromRole="Market" ToRole="DailyCandle" />
           <NavigationProperty Name="Gaps" Relationship="MarketsDBModel.FK_Gaps_Markets" FromRole="Market" ToRole="Gap" />
           <NavigationProperty Name="MarketType" Relationship="MarketsDBModel.FK_Markets_MarketTypes" FromRole="Market" ToRole="MarketType" />
+          <Property Name="GapsCurrentDirection" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="GapsCurrentDirectionCount" Type="Int32" />
+          <Property Name="GapsTotalOpen" Type="Int32" />
+          <Property Name="GapsFirstPrice" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="Candles" Relationship="MarketsDBModel.FK_Candles_Markets" FromRole="Market" ToRole="Candle" />
+          <NavigationProperty Name="DailyCandles" Relationship="MarketsDBModel.FK_DailyCandles_Markets" FromRole="Market" ToRole="DailyCandle" />
+          <Property Name="DateFirstCandle" Type="DateTime" Precision="3" />
+          <Property Name="DateLastCandle" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="MarketType">
           <Key>
@@ -271,30 +240,6 @@
           <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Markets" Relationship="MarketsDBModel.FK_Markets_MarketTypes" FromRole="MarketType" ToRole="Market" />
         </EntityType>
-        <Association Name="FK_Candles_Markets">
-          <End Type="MarketsDBModel.Market" Role="Market" Multiplicity="1" />
-          <End Type="MarketsDBModel.Candle" Role="Candle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Market">
-              <PropertyRef Name="MarketId" />
-            </Principal>
-            <Dependent Role="Candle">
-              <PropertyRef Name="MarketId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DailyCandles_Markets">
-          <End Type="MarketsDBModel.Market" Role="Market" Multiplicity="1" />
-          <End Type="MarketsDBModel.DailyCandle" Role="DailyCandle" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Market">
-              <PropertyRef Name="MarketId" />
-            </Principal>
-            <Dependent Role="DailyCandle">
-              <PropertyRef Name="MarketId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Gaps_Markets">
           <End Type="MarketsDBModel.Market" Role="Market" Multiplicity="1" />
           <End Type="MarketsDBModel.Gap" Role="Gap" Multiplicity="*" />
@@ -319,12 +264,123 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Candle">
+          <Key>
+            <PropertyRef Name="CandleId" />
+          </Key>
+          <Property Name="CandleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarketId" Type="Int32" Nullable="false" />
+          <Property Name="PeriodId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Open" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Close" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Volume" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Market" Relationship="MarketsDBModel.FK_Candles_Markets" FromRole="Candle" ToRole="Market" />
+        </EntityType>
+        <Association Name="FK_Candles_Markets">
+          <End Type="MarketsDBModel.Market" Role="Market" Multiplicity="1" />
+          <End Type="MarketsDBModel.Candle" Role="Candle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Market">
+              <PropertyRef Name="MarketId" />
+            </Principal>
+            <Dependent Role="Candle">
+              <PropertyRef Name="MarketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DailyCandle">
+          <Key>
+            <PropertyRef Name="DailyCandleId" />
+          </Key>
+          <Property Name="DailyCandleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarketId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="High" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Low" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Open" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Close" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Volume" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Market" Relationship="MarketsDBModel.FK_DailyCandles_Markets" FromRole="DailyCandle" ToRole="Market" />
+          <NavigationProperty Name="Gaps" Relationship="MarketsDBModel.FK_Gaps_DailyCandles" FromRole="DailyCandle" ToRole="Gap" />
+        </EntityType>
+        <Association Name="FK_DailyCandles_Markets">
+          <End Type="MarketsDBModel.Market" Role="Market" Multiplicity="1" />
+          <End Type="MarketsDBModel.DailyCandle" Role="DailyCandle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Market">
+              <PropertyRef Name="MarketId" />
+            </Principal>
+            <Dependent Role="DailyCandle">
+              <PropertyRef Name="MarketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Gaps_DailyCandles">
+          <End Type="MarketsDBModel.DailyCandle" Role="DailyCandle" Multiplicity="1" />
+          <End Type="MarketsDBModel.Gap" Role="Gap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DailyCandle">
+              <PropertyRef Name="DailyCandleId" />
+            </Principal>
+            <Dependent Role="Gap">
+              <PropertyRef Name="DailyCandleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MarketsDBModelStoreContainer" CdmEntityContainer="MarketsDBEntities">
+          <EntitySetMapping Name="Gaps">
+            <EntityTypeMapping TypeName="MarketsDBModel.Gap">
+              <MappingFragment StoreEntitySet="Gaps">
+                <ScalarProperty Name="GapSize" ColumnName="GapSize" />
+                <ScalarProperty Name="DailyCandleId" ColumnName="DailyCandleId" />
+                <ScalarProperty Name="FillDate" ColumnName="FillDate" />
+                <ScalarProperty Name="ExtendDate" ColumnName="ExtendDate" />
+                <ScalarProperty Name="GapExtension" ColumnName="GapExtension" />
+                <ScalarProperty Name="TestDate" ColumnName="TestDate" />
+                <ScalarProperty Name="GapBottom" ColumnName="GapBottom" />
+                <ScalarProperty Name="GapTop" ColumnName="GapTop" />
+                <ScalarProperty Name="Direction" ColumnName="Direction" />
+                <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
+                <ScalarProperty Name="MarketId" ColumnName="MarketId" />
+                <ScalarProperty Name="GapId" ColumnName="GapId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Markets">
+            <EntityTypeMapping TypeName="MarketsDBModel.Market">
+              <MappingFragment StoreEntitySet="Markets">
+                <ScalarProperty Name="DateLastCandle" ColumnName="DateLastCandle" />
+                <ScalarProperty Name="DateFirstCandle" ColumnName="DateFirstCandle" />
+                <ScalarProperty Name="GapsFirstPrice" ColumnName="GapsFirstPrice" />
+                <ScalarProperty Name="GapsTotalOpen" ColumnName="GapsTotalOpen" />
+                <ScalarProperty Name="GapsCurrentDirectionCount" ColumnName="GapsCurrentDirectionCount" />
+                <ScalarProperty Name="GapsCurrentDirection" ColumnName="GapsCurrentDirection" />
+                <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+                <ScalarProperty Name="ExchangeId" ColumnName="ExchangeId" />
+                <ScalarProperty Name="MarketTypeId" ColumnName="MarketTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
+                <ScalarProperty Name="MarketId" ColumnName="MarketId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketTypes">
+            <EntityTypeMapping TypeName="MarketsDBModel.MarketType">
+              <MappingFragment StoreEntitySet="MarketTypes">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="MarketTypeId" ColumnName="MarketTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Candles">
             <EntityTypeMapping TypeName="MarketsDBModel.Candle">
               <MappingFragment StoreEntitySet="Candles">
@@ -352,44 +408,6 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="MarketId" ColumnName="MarketId" />
                 <ScalarProperty Name="DailyCandleId" ColumnName="DailyCandleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Gaps">
-            <EntityTypeMapping TypeName="MarketsDBModel.Gap">
-              <MappingFragment StoreEntitySet="Gaps">
-                <ScalarProperty Name="GapSize" ColumnName="GapSize" />
-                <ScalarProperty Name="DailyCandleId" ColumnName="DailyCandleId" />
-                <ScalarProperty Name="FillDate" ColumnName="FillDate" />
-                <ScalarProperty Name="ExtendDate" ColumnName="ExtendDate" />
-                <ScalarProperty Name="GapExtension" ColumnName="GapExtension" />
-                <ScalarProperty Name="TestDate" ColumnName="TestDate" />
-                <ScalarProperty Name="GapBottom" ColumnName="GapBottom" />
-                <ScalarProperty Name="GapTop" ColumnName="GapTop" />
-                <ScalarProperty Name="Direction" ColumnName="Direction" />
-                <ScalarProperty Name="OpenDate" ColumnName="OpenDate" />
-                <ScalarProperty Name="MarketId" ColumnName="MarketId" />
-                <ScalarProperty Name="GapId" ColumnName="GapId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Markets">
-            <EntityTypeMapping TypeName="MarketsDBModel.Market">
-              <MappingFragment StoreEntitySet="Markets">
-                <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
-                <ScalarProperty Name="ExchangeId" ColumnName="ExchangeId" />
-                <ScalarProperty Name="MarketTypeId" ColumnName="MarketTypeId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Symbol" ColumnName="Symbol" />
-                <ScalarProperty Name="MarketId" ColumnName="MarketId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MarketTypes">
-            <EntityTypeMapping TypeName="MarketsDBModel.MarketType">
-              <MappingFragment StoreEntitySet="MarketTypes">
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="MarketTypeId" ColumnName="MarketTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

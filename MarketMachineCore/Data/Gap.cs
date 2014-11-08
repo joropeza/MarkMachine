@@ -27,7 +27,7 @@ namespace MarketMachineCore.Data
         public int DailyCandleId { get; set; }
         public decimal GapSize { get; set; }
     
-        public virtual DailyCandle DailyCandle { get; set; }
         public virtual Market Market { get; set; }
+        public virtual DailyCandle DailyCandle { get; set; }
     }
 }

@@ -26,9 +26,9 @@ namespace MarketMachineCore.Data
         public decimal Low { get; set; }
         public decimal Open { get; set; }
         public decimal Close { get; set; }
-        public int Volume { get; set; }
+        public long Volume { get; set; }
     
-        public virtual ICollection<Gap> Gaps { get; set; }
         public virtual Market Market { get; set; }
+        public virtual ICollection<Gap> Gaps { get; set; }
     }
 }

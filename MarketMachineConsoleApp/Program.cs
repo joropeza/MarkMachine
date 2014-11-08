@@ -13,12 +13,25 @@ namespace MarketMachineConsoleApp
         static void Main(string[] args)
         {
             ProcessRunner pr = new ProcessRunner();
+            DataIntegrityChecks dc = new DataIntegrityChecks();
 
-            //pr.GapFinder(1);
-            //pr.UpdateMarkets();
-            //pr.CandleCatchupAll();
+            //pr.GenerateMonthlyCandles(1);
+
+            pr.FirstAndLastDates();
+
+            /*
+            pr.UpdateMarkets();
+            pr.CandleCatchupAll();
+            pr.GapFinders();
+            
+            pr.FillUnfilledGaps();
 
             pr.GetCurrentPrices();
+
+            pr.GapStats();
+
+            dc.DailyCandleCheck(1);
+            */
 
             Console.ReadLine();
         }

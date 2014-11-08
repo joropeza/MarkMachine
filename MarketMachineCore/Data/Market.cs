@@ -16,9 +16,9 @@ namespace MarketMachineCore.Data
     {
         public Market()
         {
+            this.Gaps = new HashSet<Gap>();
             this.Candles = new HashSet<Candle>();
             this.DailyCandles = new HashSet<DailyCandle>();
-            this.Gaps = new HashSet<Gap>();
         }
     
         public int MarketId { get; set; }
@@ -27,10 +27,16 @@ namespace MarketMachineCore.Data
         public int MarketTypeId { get; set; }
         public int ExchangeId { get; set; }
         public Nullable<decimal> CurrentPrice { get; set; }
+        public string GapsCurrentDirection { get; set; }
+        public Nullable<int> GapsCurrentDirectionCount { get; set; }
+        public Nullable<int> GapsTotalOpen { get; set; }
+        public Nullable<decimal> GapsFirstPrice { get; set; }
+        public Nullable<System.DateTime> DateFirstCandle { get; set; }
+        public Nullable<System.DateTime> DateLastCandle { get; set; }
     
-        public virtual ICollection<Candle> Candles { get; set; }
-        public virtual ICollection<DailyCandle> DailyCandles { get; set; }
         public virtual ICollection<Gap> Gaps { get; set; }
         public virtual MarketType MarketType { get; set; }
+        public virtual ICollection<Candle> Candles { get; set; }
+        public virtual ICollection<DailyCandle> DailyCandles { get; set; }
     }
 }
